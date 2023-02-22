@@ -1,0 +1,91 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    //Google Services plugin - firebase dependency for push notification
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        applicationId "av.gms.push.notif"
+        minSdkVersion 24
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+//    debug.keystore:
+//    SHA1: 6F:71:CF:A7:29:63:55:E7:81:85:6F:A9:FD:F8:40:7B:35:F9:AD:5A
+//    antonio.keystore:
+//    SHA1: 91:C9:A1:BC:8B:9A:1B:7E:4D:0A:69:C4:D7:68:3C:DC:51:9D:E9:13
+
+    signingConfigs {
+        debug {
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('C:/Users/antpc/.android/debug.keystore')
+        }
+        release {
+            storePassword 'password'
+            keyAlias 'signinapp'
+            keyPassword 'password'
+            storeFile file('C:/Users/antpc/.android/antonio.keystore')
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            applicationIdSuffix = ".dev"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            applicationIdSuffix = ""
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        ignoreWarnings false
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation 'com.google.android.material:material:1.6.1'
+
+    // Import the BoM for the Firebase platform
+    // When using the BoM, don't specify versions in Firebase dependencies
+    // https://firebase.google.com/docs/android/setup#available-libraries
+    implementation platform('com.google.firebase:firebase-bom:31.2.2')
+
+    // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
