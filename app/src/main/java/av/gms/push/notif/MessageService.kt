@@ -48,6 +48,8 @@ class MessageService : FirebaseMessagingService() {
         //Create NotificationChannel and register the channel with the system
         idChannel = getString(R.string.default_notification_channel_id)
         createChannel(idChannel, getString(R.string.default_notification_channel_name))
+
+        Log.d(TAG, "GMS onCreate!!")
     }
 
     /**
@@ -71,9 +73,9 @@ class MessageService : FirebaseMessagingService() {
         }
     }
 
-
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
+        Log.d(TAG, "GMS onMessageReceived!!")
 
         try {
             logNotification(remoteMessage)
@@ -184,6 +186,11 @@ class MessageService : FirebaseMessagingService() {
         //Post notification to be shown in the status bar
         val notificationManager = NotificationManagerCompat.from(this)
         notificationManager.notify(notificationId, builder.build())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "GMS onDestroy!!")
     }
 
 }
