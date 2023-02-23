@@ -10,7 +10,6 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONObject
@@ -36,7 +35,7 @@ class MessageService : FirebaseMessagingService() {
             //eg: messageId="0:1677094539719860%8334b89d8334b89d"
             return try {
                 idMsg!!.substring(2, idMsg.indexOf("%8")).toLong().mod(Int.MAX_VALUE)
-            } catch (exc: Exception){
+            } catch (exc: Exception) {
                 0
             }
         }
@@ -49,7 +48,7 @@ class MessageService : FirebaseMessagingService() {
         idChannel = getString(R.string.default_notification_channel_id)
         createChannel(idChannel, getString(R.string.default_notification_channel_name))
 
-        Log.d(TAG, "GMS onCreate!!")
+        Log.d(TAG, "GMS_DEBUG onCreate!!")
     }
 
     /**
@@ -75,17 +74,17 @@ class MessageService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        Log.d(TAG, "GMS onMessageReceived!!")
+        Log.d(TAG, "GMS_DEBUG onMessageReceived!!")
 
         try {
             logNotification(remoteMessage)
 
             //eg. key-value pair is:  payload = {"dettaglio":false,"id":"26531700"}
             val payload: JSONObject = JSONObject(remoteMessage.data[PAYLOAD_KEY] ?: "{}")
-            Log.d(TAG, "GMS Push PAYLOAD: $payload")
+            Log.d(TAG, "GMS_DEBUG Push PAYLOAD: $payload")
             if (!payload.isNull(NOTIFICATION_ID_KEY)) {
                 val notificationId = payload.getInt(NOTIFICATION_ID_KEY)
-                Log.d(TAG, "GMS Push notification id: $notificationId")
+                Log.d(TAG, "GMS_DEBUG Push notification id: $notificationId")
             }
 
             //after parsing show notification in notification drawer (cassetto delle notifiche)
@@ -96,7 +95,7 @@ class MessageService : FirebaseMessagingService() {
             showNotification(title, body, notificationId)
 
         } catch (exc: Exception) {
-            Log.e(TAG, "GMS Error: while decoding notification, remoteMessage:${remoteMessage.data}", exc)
+            Log.e(TAG, "GMS_DEBUG Error: while decoding notification, remoteMessage:${remoteMessage.data}", exc)
         }
     }
 
@@ -190,7 +189,7 @@ class MessageService : FirebaseMessagingService() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "GMS onDestroy!!")
+        Log.d(TAG, "GMS_DEBUG onDestroy!!")
     }
 
 }
