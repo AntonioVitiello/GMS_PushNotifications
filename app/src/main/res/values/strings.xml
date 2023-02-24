@@ -3,5 +3,14 @@
     <string name="default_notification_channel_id" translatable="false">my_app_default_channel_id</string>
     <string name="default_notification_channel_name" translatable="false">GmsPushNotif</string>
     <string name="user_visible_channel_description">DEFAULT CHANNEL</string>
+    <string name="check_permission">CHECK PERMISSION</string>
+    <string name="init_notifications">INIT NOTIFICATIONS</string>
+    <string name="del_notifications">DELETE NOTIFICATIONS</string>
+    <string name="label_push_token">Push Token:</string>
+    <string name="label_firebase_id">Firebase ID (FID):</string>
+    <string name="push_permission_granted">Permission for Push Notification: GRANTED</string>
+    <string name="push_permission_denied">Permission for Push Notification: DENIED</string>
+    <string name="push_permission_already_granted">Permission alredy granted</string>
+    <string name="push_permission_no_need">No permission needed for push notification</string>
 
 </resources>

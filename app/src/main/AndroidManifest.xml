@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="av.gms.push.notif">
 
+    <!-- GSM Push Notifications Permission: required only on Android 13 (API level 33: TIRAMISU) and higher. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -30,9 +33,9 @@
         <!-- Firebase message service -->
         <service
             android:name=".MessageService"
+            android:directBootAware="true"
             android:enabled="true"
-            android:exported="false"
-            android:directBootAware="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

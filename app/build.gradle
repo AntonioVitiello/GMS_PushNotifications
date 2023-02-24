@@ -70,32 +70,32 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
     implementation 'com.google.android.material:material:1.6.1'
 
     // Import the BoM for the Firebase platform
-    // When using the BoM, don't specify versions in Firebase dependencies
-    // https://firebase.google.com/docs/android/setup#available-libraries
     implementation platform('com.google.firebase:firebase-bom:31.2.2')
 
-    // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
+    // When using the BoM, you don't specify versions in Firebase and Analytics libraries dependencies
+    // https://firebase.google.com/docs/android/setup#available-libraries
 
     // Firebase Cloud Messaging (Kotlin)
     implementation 'com.google.firebase:firebase-messaging-ktx'
 
+    // Firebase Cloud in-app Messaging (Kotlin)
+    // Trova il FID della tua app nel Logcat: "I/FIAM.Headless: Starting InAppMessaging runtime with Installation ID"
+    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx'
+
     // Firebase Cloud Messaging (Java)
     implementation 'com.google.firebase:firebase-messaging'
 
-    // For an optimal experience using FCM, add the Firebase SDK
-    // for Google Analytics. This is recommended, but not required.
+    // Firebase SDK Google Analytics. This is recommended, but not required.
     //implementation 'com.google.firebase:firebase-analytics'
 
     implementation 'com.google.firebase:firebase-installations-ktx:17.1.2'
-    implementation 'androidx.work:work-runtime:2.8.0'
+    implementation 'androidx.work:work-runtime:2.7.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

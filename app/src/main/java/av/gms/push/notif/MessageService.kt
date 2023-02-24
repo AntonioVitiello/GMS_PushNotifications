@@ -25,7 +25,7 @@ class MessageService : FirebaseMessagingService() {
 //    private val notificheRepository = NotificheRepository()
 
     companion object {
-        const val TAG = "AAA"
+        const val TAG = "MessageService"
         private const val PAYLOAD_KEY = "payload"
         private const val NOTIFICATION_ID_KEY = "id"
         const val KEY_EXTRA_INTENT_NOTIFICATION_ID = "notification id"
