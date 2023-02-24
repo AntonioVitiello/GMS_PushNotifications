@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     //Firebase Push Token
     private var currentPushToken: String? = null
+
     //Firebase installation ID
     private var fid: String? = null
 
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
     private fun showPermissionGranted() {
         val idMsg = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                initPushNotifications()
                 R.string.push_permission_granted
             } else {
                 resetCurrentState()
@@ -139,7 +141,6 @@ class MainActivity : AppCompatActivity() {
                 currentPushToken = token
                 showCurrentState()
                 Toast.makeText(this, "Push Notifications initialized!", Toast.LENGTH_SHORT).show()
-                showPermissionGranted()
                 Log.d(TAG, "GMS_DEBUG PushToken:\n[$token]")
             }
         } catch (e: Exception) {
@@ -154,9 +155,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun deletePushNotifications() {
-        PushUtils.deleteToken {
-            resetCurrentState()
-            showCurrentState()
+        if(fid != null || currentPushToken != null) {
+            PushUtils.deleteToken {
+                resetCurrentState()
+                showCurrentState()
+            }
+        } else {
+            Log.i(TAG, "GMS_DEBUG PushNotifications not active.")
         }
     }
 
