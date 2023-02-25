@@ -165,7 +165,7 @@ class MessageService : FirebaseMessagingService() {
         val builder = NotificationCompat.Builder(this, idChannel)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
-            .setSmallIcon(R.mipmap.ic_launcher_round)
+            .setSmallIcon(R.drawable.ic_push_notification)
             .setContentTitle(title)
             .setContentText(messageText)
             .setPriority(NotificationCompat.PRIORITY_MAX)

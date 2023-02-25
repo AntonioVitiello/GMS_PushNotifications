@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun initPushNotifications() {
+    private fun initPushNotifications() {
         try {
             PushUtils.getFid { fid: String ->
                 this.fid = fid
@@ -144,8 +144,8 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "GMS_DEBUG PushToken:\n[$token]")
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Push Notifications error!", Toast.LENGTH_SHORT).show()
-            Log.e(TAG, "GMS_DEBUG getToken failed", e)
+            Toast.makeText(this, "Push Notifications error: init", Toast.LENGTH_SHORT).show()
+            Log.e(TAG, "GMS_DEBUG initPushNotifications failed", e)
         }
     }
 
